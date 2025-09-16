@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetDates,
@@ -7,7 +8,7 @@ import {
   resetAll,
 } from "../redux/api/feature/timetableSlice";
 import { AppDispatch, RootState } from "../redux/store";
-import { Timetable } from "../types/interface";
+import type { Timetable } from "../types/interface";
 
 export const useTimetable = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,16 +17,13 @@ export const useTimetable = () => {
   );
 
   useEffect(() => {
-    if (endDate && new Date() > new Date(endDate)) {
+    if (endDate && moment().isAfter(moment(endDate))) {
       dispatch(resetDates());
     }
   }, [dispatch, endDate]);
 
-  const saveTimetable = (
-    formDataWeekA: Timetable,
-    formDataWeekB: Timetable
-  ) => {
-    dispatch(setTimetable({ weekA: formDataWeekA, weekB: formDataWeekB }));
+  const saveTimetable = (newWeekA: Timetable, newWeekB: Timetable) => {
+    dispatch(setTimetable({ weekA: newWeekA, weekB: newWeekB }));
   };
 
   const handleDatesSubmit = (startDate: string, endDate: string) => {

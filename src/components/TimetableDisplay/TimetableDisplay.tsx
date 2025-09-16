@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import moment from "moment";
 import Button from "../Button/Button";
 import { useDateInfo } from "../../hooks/useDateInfo";
 import { useTimetable } from "../../hooks/useTimetable";
@@ -6,18 +7,17 @@ import type { TimetableDisplayProps } from "./TimetableDisplay.types";
 import type { DayOfWeek } from "../../types/interface";
 import styles from "./TimetableDisplay.module.css";
 
-
 const TimetableDisplay: React.FC<TimetableDisplayProps> = (props) => {
   const { weekA, weekB, onEdit, onUpdateDates, onReset } = props;
   const { currentDate, dayOfWeek, weekType } = useDateInfo();
-  const currentTimetable = (weekType === "A" ? weekA : weekB);
-  const subjectsForToday = currentTimetable[dayOfWeek as DayOfWeek] || [];
+  const currentTimetable = weekType === "A" ? weekA : weekB;
+  const subjectsForToday = currentTimetable[dayOfWeek as DayOfWeek] || []; 
 
   const { hasTimetable } = useTimetable();
 
   useEffect(() => {
     const endDate = localStorage.getItem("endDate");
-    if (endDate && new Date() > new Date(endDate)) {
+    if (endDate && moment().isAfter(moment(endDate))) {
       onUpdateDates();
     }
   }, [onUpdateDates]);
@@ -54,7 +54,7 @@ const TimetableDisplay: React.FC<TimetableDisplayProps> = (props) => {
         <div className={styles.displayContainer}>
           <h1 className={styles.welcomeTitle}>Daily Timetable Reminder</h1>
           <p className={styles.infoText}>
-            {currentDate.toLocaleDateString("en-US", { dateStyle: "full" })}
+            {currentDate.format("dddd, MMMM Do YYYY")}
           </p>
           <h2 className={styles.infoText}>
             It's {dayOfWeek} of Week {weekType}

@@ -1,3 +1,4 @@
+import moment, { Moment } from "moment";
 import { Timetable } from "../types/interface";
 
 export const initialTimetable: Timetable = {
@@ -9,15 +10,23 @@ export const initialTimetable: Timetable = {
 };
 
 export const getWeekType = (
-  currentDate: Date,
+  currentDate: Moment,
   startDateStr: string | null
 ): "A" | "B" => {
-  const defaultStartDate = new Date("2025-10-01T00:00:00");
-  const startDate = startDateStr ? new Date(startDateStr) : defaultStartDate;
+  const defaultStartDate = moment("2025-09-01");
+  const startDate = startDateStr ? moment(startDateStr) : defaultStartDate;
 
-  const diffInDays = Math.floor(
-    (currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
-  );
-  const weekNumber = Math.floor(diffInDays / 7) + 1;
+  // Calculate the difference in calendar weeks
+  const startWeek = startDate.isoWeek();
+  const currentWeek = currentDate.isoWeek();
+
+  // Handle the edge case of a year change
+  const weekDiff = currentWeek - startWeek;
+
+  const totalWeeks = weekDiff + (currentDate.year() - startDate.year()) * 52;
+
+  const weekNumber = totalWeeks + 1;
+
+  // Week A is odd, Week B is even
   return weekNumber % 2 !== 0 ? "A" : "B";
 };
