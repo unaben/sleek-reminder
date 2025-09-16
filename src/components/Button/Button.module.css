@@ -1,0 +1,58 @@
+.button {
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+  }
+  
+  .button:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.125rem);
+  }
+  
+  .button:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+  
+  .button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  .primary {
+    background-color: #2563eb;
+  }
+  
+  .primary:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .danger {
+    background-color: #ef4444;
+  }
+  
+  .danger:hover {
+    background-color: #dc2626;
+  }
+  
+  .success {
+    background-color: #22c55e;
+  }
+  
+  .success:hover {
+    background-color: #16a34a;
+  }
+  
+  .secondary {
+    background-color: #6b7280;
+  }
+  
+  .secondary:hover {
+    background-color: #4b5563;
+  }
+  
