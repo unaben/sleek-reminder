@@ -2,11 +2,11 @@ import moment, { Moment } from "moment";
 import { Timetable } from "../types/interface";
 
 export const initialTimetable: Timetable = {
-  Monday: [""],
-  Tuesday: [""],
-  Wednesday: [""],
-  Thursday: [""],
-  Friday: [""],
+  Monday: [],
+  Tuesday: [],
+  Wednesday: [],
+  Thursday: [],
+  Friday: [],
 };
 
 export const getWeekType = (

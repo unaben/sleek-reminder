@@ -15,6 +15,7 @@ const TimetableWrapper: React.FC = () => {
     isEditing,
     saveTimetable,
     isDateRangeSet,
+    hasTimetable,
     handleDatesSubmit,
     handleUpdateDates,
     handleReset,
@@ -26,11 +27,11 @@ const TimetableWrapper: React.FC = () => {
         <DateForm onDatesSubmit={handleDatesSubmit} />
       </div>
     );
-  }
+  } 
 
   return (
     <div className={styles.appContainer}>
-      {isEditing ? (
+      {!hasTimetable || isEditing ? (
         <TimetableForm
           initialWeekA={weekA}
           initialWeekB={weekB}

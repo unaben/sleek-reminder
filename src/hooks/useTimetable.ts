@@ -14,7 +14,7 @@ export const useTimetable = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { weekA, weekB, isEditing, isDateRangeSet, endDate } = useSelector(
     (state: RootState) => state.timetable
-  );
+  );  
 
   useEffect(() => {
     if (endDate && moment().isAfter(moment(endDate))) {
